@@ -1,0 +1,75 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Andy <andy@discordapp.com>
+Date: Mon, 5 May 2025 14:44:58 -0700
+Subject: [PATCH] migrate packages.config => PackageReference
+
+---
+ src/Core/Core.csproj     | 26 +++++++++-----------------
+ src/Core/packages.config |  8 --------
+ 2 files changed, 9 insertions(+), 25 deletions(-)
+ delete mode 100644 src/Core/packages.config
+
+diff --git a/src/Core/Core.csproj b/src/Core/Core.csproj
+index a5972a3e..de2f4093 100644
+--- a/src/Core/Core.csproj
++++ b/src/Core/Core.csproj
+@@ -267,18 +267,14 @@
+     <Compile Include="FileModifiers\XdtTransformer.cs" />
+     <Compile Include="V3Interop\IV3InteropRepository.cs" />
+     <Compile Include="V3Interop\IV3PackageMetadata.cs" />
+-    <Reference Include="Microsoft.Data.Edm, Version=5.6.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>True</SpecificVersion>
+-      <HintPath>..\..\..\..\packages\Microsoft.Data.Edm.5.6.1\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Data.OData, Version=5.6.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>True</SpecificVersion>
+-      <HintPath>..\..\..\..\packages\Microsoft.Data.OData.5.6.1\lib\net40\Microsoft.Data.OData.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>True</SpecificVersion>
+-      <HintPath>..\..\..\..\packages\Microsoft.Data.Services.Client.5.6.1\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+-    </Reference>
++
++    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" />
++    <PackageReference Include="ILRepack" Version="1.26.0" />
++    <PackageReference Include="Microsoft.Data.Edm" Version="5.8.4" />
++    <PackageReference Include="Microsoft.Data.OData" Version="5.8.4" />
++    <PackageReference Include="Microsoft.Data.Services.Client" Version="5.8.4" />
++    <PackageReference Include="System.Spatial" Version="5.8.4" />
++
+     <Reference Include="Microsoft.Web.XmlTransform">
+       <HintPath>..\..\lib\Microsoft.Web.XmlTransform.dll</HintPath>
+     </Reference>
+@@ -288,10 +284,6 @@
+     <Reference Include="System.Runtime.Serialization" />
+     <Reference Include="System.Security" />
+     <Reference Include="System.ServiceModel" />
+-    <Reference Include="System.Spatial, Version=5.6.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>True</SpecificVersion>
+-      <HintPath>..\..\..\..\packages\System.Spatial.5.6.1\lib\net40\System.Spatial.dll</HintPath>
+-    </Reference>
+     <Reference Include="System.Xml.Linq" />
+     <Reference Include="Microsoft.CSharp" />
+     <Reference Include="System.Xml" />
+@@ -384,4 +376,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/src/Core/packages.config b/src/Core/packages.config
+deleted file mode 100644
+index 8cceb007..00000000
+--- a/src/Core/packages.config
++++ /dev/null
+@@ -1,8 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="ILRepack" version="1.26.0" targetFramework="net45" />
+-  <package id="Microsoft.Data.Edm" version="5.6.1" targetFramework="net451" />
+-  <package id="Microsoft.Data.OData" version="5.6.1" targetFramework="net451" />
+-  <package id="Microsoft.Data.Services.Client" version="5.6.1" targetFramework="net451" />
+-  <package id="System.Spatial" version="5.6.1" targetFramework="net451" />
+-</packages>
+\ No newline at end of file
